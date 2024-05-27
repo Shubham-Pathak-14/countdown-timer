@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "./FormInput.css";
 
-const InputForm = () => {
+const FormInput = ({ onDateSelect, onCancel, isCountDownActive }) => {
   const [date, setDate] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // onDateSelect(date);
+    onDateSelect(date);
   };
 
   return (
@@ -18,9 +18,21 @@ const InputForm = () => {
         required
         className="input-field"
       />
-      <button type="button">Start Timer</button>
+
+      {!isCountDownActive && (
+        <button type="submit" className="button">
+          Start Timer
+        </button>
+      )}
+
+      {isCountDownActive && (
+        <button type="button" onClick={onCancel} className="button">
+          Cancel Timer
+        </button>
+      )}
+
     </form>
   );
 };
 
-export default InputForm;
+export default FormInput;
